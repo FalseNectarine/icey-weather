@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Icy Weather Map</title>
+
+<link rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  crossorigin />
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #525252;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Controls ---------- */
+
+.control-panel {
+  position: absolute;
+  right: 10px;
+  z-index: 1000;
+  background: #2f2f2f;
+  padding: 8px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.9em;
+  max-height: 40vh;
+  overflow-y: auto;
+  user-select: none;
+}
+
+#stateControl { top: 10px; }
+#colorControl { top: 10px;
+                right: 100px;
+}
+
+.toggle {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.section {
+  margin-top: 6px;
+}
+
+.legend-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+  border: 1px solid #000;
+  vertical-align: middle;
+}
+
+/* ---------- Popup ---------- */
+
+.popup-status {
+  font-size: 0.9em;
+  margin-bottom: 6px;
+}
+
+.popup-status.waiting { color: #aaa; }
+.popup-status.ready   { color: #6fdb6f; }
+.popup-status.error   { color: #ff6b6b; }
+
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+</style>
+</head>
+
+<body>
+
+<div id="stateControl" class="control-panel">
+  <div id="stateToggle" class="toggle">▶ States</div>
+  <div id="stateCheckboxes" class="section" hidden></div>
+</div>
+
+<div id="colorControl" class="control-panel">
+  <div id="colorToggle" class="toggle">▶ Categories</div>
+  <div id="colorCheckboxes" class="section" hidden></div>
+</div>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+/* ============================
+   CONFIG
+============================ */
+
+const STATE_DATA_DIR = "geojson/20260115_1";
+
+const STATES = [
+  "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA",
+  "HI","ID","IL","IN","IA","KS","KY","LA","ME","MD",
+  "MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ",
+  "NM","NY","NC","ND","OH","OK","OR","PA","RI","SC",
+  "SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"
+];
+
+/* ============================
+   Google Form
+============================ */
+
+const FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSf_3lYCaWm1HsXnfdgA5ECoZijeBC1wdLm2g677XJcUufeirg/formResponse";
+
+const ENTRY = {
+  DATE: "entry.60272883",
+  TYPE: "entry.2129632532",
+  CITY_STATE: "entry.1350767981",
+  COUNTY: "entry.1502813908",
+  COORDS: "entry.144748390"
+};
+
+/* ============================
+   MAP INIT
+============================ */
+
+const map = L.map("map", {
+  zoomSnap: 0.25,
+  zoomDelta: 0.5
+}).setView([39.5, -98.35], 4);
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "&copy; OpenStreetMap contributors"
+}).addTo(map);
+
+/* ============================
+   REGISTRIES
+============================ */
+
+const stateLayers   = {};
+const stateFeatures = {};
+const activeStates  = new Set(STATES);
+
+const colorIndex   = new Map(); // key → { color, label }
+const activeColors = new Set();
+
+/* ============================
+   STYLING
+============================ */
+
+function getColorKey(f) {
+  return f.properties.mapchart_label ||
+         f.properties.mapchart_color ||
+         "Uncategorized";
+}
+
+function countyStyle(f) {
+  const hidden =
+    Boolean(f.properties.mapchart_hidden) ||
+    !activeColors.has(getColorKey(f));
+
+  return {
+    fillColor: f.properties.mapchart_color || "#d1dbdd",
+    weight: 0.6,
+    color: "#000",
+    fillOpacity: hidden ? 0 : 0.75
+  };
+}
+
+function onEachCounty(f, layer) {
+  const name = f.properties.NAME || "Unknown";
+  layer.bindTooltip(name, { sticky: true });
+}
+
+/* ============================
+   LOAD STATES
+============================ */
+
+async function loadState(state) {
+  try {
+    const res = await fetch(`${STATE_DATA_DIR}/${state}.geojson`);
+    if (!res.ok) return;
+
+    const data = await res.json();
+
+    data.features.forEach(f => {
+      const key = getColorKey(f);
+      if (!colorIndex.has(key)) {
+        colorIndex.set(key, {
+          color: f.properties.mapchart_color || "#d1dbdd",
+          label: key
+        });
+        activeColors.add(key);
+      }
+    });
+
+    const layer = L.geoJSON(data, {
+      style: countyStyle,
+      onEachFeature: onEachCounty
+    }).addTo(map);
+
+    stateLayers[state] = layer;
+    stateFeatures[state] = data.features || [];
+
+    refreshColorUI();
+  } catch (err) {
+    console.warn(`Failed loading ${state}`, err);
+  }
+}
+
+STATES.forEach(loadState);
+
+/* ============================
+   STATE UI
+============================ */
+
+const stateToggle = document.getElementById("stateToggle");
+const stateBox = document.getElementById("stateCheckboxes");
+
+stateToggle.onclick = () => {
+  const open = !stateBox.hasAttribute("hidden");
+  stateBox.toggleAttribute("hidden", open);
+  stateToggle.textContent = open ? "▶ States" : "▼ States";
+};
+
+STATES.forEach(state => {
+  const label = document.createElement("label");
+  const cb = document.createElement("input");
+  cb.type = "checkbox";
+  cb.checked = true;
+
+  cb.onchange = () => {
+    const layer = stateLayers[state];
+    if (!layer) return;
+    cb.checked ? map.addLayer(layer) : map.removeLayer(layer);
+  };
+
+  label.append(cb, ` ${state}`);
+  stateBox.append(label, document.createElement("br"));
+});
+
+/* ============================
+   COLOR UI
+============================ */
+
+const colorToggle = document.getElementById("colorToggle");
+const colorBox = document.getElementById("colorCheckboxes");
+
+colorToggle.onclick = () => {
+  const open = !colorBox.hasAttribute("hidden");
+  colorBox.toggleAttribute("hidden", open);
+  colorToggle.textContent = open ? "▶ Categories" : "▼ Categories";
+};
+
+function refreshColorUI() {
+  colorBox.innerHTML = "";
+
+  colorIndex.forEach((info, key) => {
+    const label = document.createElement("label");
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.checked = true;
+
+    cb.onchange = () => {
+      cb.checked ? activeColors.add(key) : activeColors.delete(key);
+      redrawAll();
+    };
+
+    const swatch = document.createElement("span");
+    swatch.className = "legend-swatch";
+    swatch.style.background = info.color;
+
+    label.append(cb, " ", swatch, info.label);
+    colorBox.append(label, document.createElement("br"));
+  });
+}
+
+function redrawAll() {
+  Object.values(stateLayers).forEach(layer => {
+    layer.setStyle(countyStyle);
+  });
+}
+
+/* ============================
+   REPORT FLOW (UNCHANGED)
+============================ */
+
+let activeReport = null;
+let popupLock = false;
+let watchdog = null;
+
+/* ============================
+   MAP CLICK
+============================ */
+
+map.on("click", e => {
+  if (popupLock) return;
+
+  popupLock = true;
+  activeReport = {
+    lat: e.latlng.lat,
+    lng: e.latlng.lng,
+    county: null,
+    state: null,
+    status: "gathering"
+  };
+
+  map.closePopup();
+  openPopup();
+  resolveLocation();
+});
+
+/* ============================
+   POPUP
+============================ */
+
+function openPopup() {
+  const today = new Date().toISOString().split("T")[0];
+
+  const popup = L.popup({ closeOnClick: false })
+    .setLatLng([activeReport.lat, activeReport.lng])
+    .setContent(`
+      <div>
+        <div id="popupStatus" class="popup-status waiting">
+          Gathering location data…
+        </div>
+
+        <label>Date Seen</label><br>
+        <input type="date" id="dateSeen" value="${today}"><br><br>
+
+        <label>Type</label><br>
+        <select id="weatherType">
+          <option>Spotted</option>
+          <option>Staging</option>
+          <option>Raid</option>
+          <option>Violence Against Citizens</option>
+        </select><br><br>
+
+        <button id="submitBtn" disabled>Gathering data…</button>
+      </div>
+    `)
+    .openOn(map);
+
+  popup.on("remove", resetFlow);
+
+  watchdog = setTimeout(() => {
+    const s = document.getElementById("popupStatus");
+    if (s) {
+      s.className = "popup-status error";
+      s.innerHTML =
+        "Anti-automation protection<br>Please close this popup and try again";
+    }
+  }, 30000);
+
+  document.getElementById("submitBtn").onclick = submitReport;
+}
+
+/* ============================
+   LOCATION RESOLUTION
+============================ */
+
+function resolveLocation() {
+  const pt = [activeReport.lng, activeReport.lat];
+
+  for (const state of activeStates) {
+    const feats = stateFeatures[state];
+    if (!feats) continue;
+
+    for (const f of feats) {
+      const g = f.geometry;
+      const polys =
+        g.type === "Polygon" ? [g.coordinates] :
+        g.type === "MultiPolygon" ? g.coordinates : [];
+
+      for (const poly of polys) {
+        if (pointInPolygon(pt, poly)) {
+          activeReport.county = f.properties.NAME;
+          activeReport.state = state;
+          activeReport.status = "ready";
+          return updateUI();
+        }
+      }
+    }
+  }
+
+  activeReport.status = "error";
+  updateUI();
+}
+
+/* ============================
+   UI UPDATE
+============================ */
+
+function updateUI() {
+  const s = document.getElementById("popupStatus");
+  const b = document.getElementById("submitBtn");
+  if (!s || !b) return;
+
+  if (activeReport.status === "ready") {
+    clearTimeout(watchdog);
+    s.className = "popup-status ready";
+    s.innerHTML = `${activeReport.state}<br>${activeReport.county}`;
+    b.disabled = false;
+    b.textContent = "Submit Report";
+  } else {
+    s.className = "popup-status error";
+    s.textContent = "Unable to resolve location.";
+  }
+}
+
+/* ============================
+   SUBMIT
+============================ */
+
+function submitReport() {
+  if (!activeReport || activeReport.status !== "ready") return;
+
+  const data = new URLSearchParams();
+  data.append(ENTRY.DATE, dateSeen.value);
+  data.append(ENTRY.TYPE, weatherType.value);
+  data.append(ENTRY.CITY_STATE, activeReport.state);
+  data.append(ENTRY.COUNTY, activeReport.county);
+  data.append(
+    ENTRY.COORDS,
+    `${activeReport.lat.toFixed(6)}, ${activeReport.lng.toFixed(6)}`
+  );
+
+  fetch(FORM_URL, { method: "POST", mode: "no-cors", body: data });
+  map.closePopup();
+}
+
+/* ============================
+   RESET
+============================ */
+
+function resetFlow() {
+  popupLock = false;
+  activeReport = null;
+  clearTimeout(watchdog);
+}
+
+/* ============================
+   GEOMETRY
+============================ */
+
+function pointInRing(pt, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const xi = ring[i][0], yi = ring[i][1];
+    const xj = ring[j][0], yj = ring[j][1];
+    const intersect =
+      (yi > pt[1]) !== (yj > pt[1]) &&
+      pt[0] < ((xj - xi) * (pt[1] - yi)) / (yj - yi) + xi;
+    if (intersect) inside = !inside;
+  }
+  return inside;
+}
+
+function pointInPolygon(pt, coords) {
+  if (!pointInRing(pt, coords[0])) return false;
+  for (let i = 1; i < coords.length; i++) {
+    if (pointInRing(pt, coords[i])) return false;
+  }
+  return true;
+}
+</script>
+</body>
+</html>
+
