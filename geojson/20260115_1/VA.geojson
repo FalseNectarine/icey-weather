@@ -7281,9 +7281,9 @@
         "LSAD": "06",
         "ALAND": 2200698748,
         "AWATER": 10892582,
-        "mapchart_label": "Capitulate",
-        "mapchart_color": "#bd0026",
-        "mapchart_group": 1,
+        "mapchart_label": "ICE - Raids",
+        "mapchart_color": "#41b6c4",
+        "mapchart_group": 4,
         "mapchart_hidden": false
       },
       "geometry": {
