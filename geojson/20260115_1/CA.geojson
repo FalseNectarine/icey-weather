@@ -699,9 +699,9 @@
         "LSAD": "06",
         "ALAND": 10510588451,
         "AWATER": 1794793532,
-        "mapchart_label": "ICE - Raids",
-        "mapchart_color": "#41b6c4",
-        "mapchart_group": 4,
+        "mapchart_label": "ICE - Violent",
+        "mapchart_color": "#253494",
+        "mapchart_group": 6,
         "mapchart_hidden": false
       },
       "geometry": {
