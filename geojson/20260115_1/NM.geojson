@@ -619,9 +619,9 @@
         "LSAD": "06",
         "ALAND": 3007310205,
         "AWATER": 16190430,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "Resistive",
+        "mapchart_color": "#00441b",
+        "mapchart_group": 0,
         "mapchart_hidden": false
       },
       "geometry": {
