@@ -1163,9 +1163,9 @@
         "LSAD": "06",
         "ALAND": 3068207883,
         "AWATER": 15044355,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "Resistive",
+        "mapchart_color": "#00441b",
+        "mapchart_group": 0,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -1334,9 +1334,9 @@
         "LSAD": "06",
         "ALAND": 5422404947,
         "AWATER": 7126155,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "Resistive",
+        "mapchart_color": "#00441b",
+        "mapchart_group": 0,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -2262,9 +2262,9 @@
         "LSAD": "06",
         "ALAND": 4827418440,
         "AWATER": 19106241,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "Resistive",
+        "mapchart_color": "#00441b",
+        "mapchart_group": 0,
         "mapchart_hidden": false
       },
       "geometry": {

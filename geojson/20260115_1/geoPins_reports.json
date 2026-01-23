@@ -1,0 +1,17 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "ICE Activity – Staging",
+        "category": "Report",
+        "description": "Vehicles staging in parking lot"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-97.7431, 30.2672]
+      }
+    }
+  ]
+}
