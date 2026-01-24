@@ -13,9 +13,9 @@
         "LSAD": "06",
         "ALAND": 693144670,
         "AWATER": 9191912,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "ICE - Spotted/Staging",
+        "mapchart_color": "#7fcdbb",
+        "mapchart_group": 3,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -4246,9 +4246,9 @@
         "LSAD": "06",
         "ALAND": 518261551,
         "AWATER": 2517004,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "ICE - Spotted/Staging",
+        "mapchart_color": "#7fcdbb",
+        "mapchart_group": 3,
         "mapchart_hidden": false
       },
       "geometry": {

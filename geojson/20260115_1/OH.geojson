@@ -1455,9 +1455,9 @@
         "LSAD": "06",
         "ALAND": 1378853105,
         "AWATER": 29125601,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "ICE - Raids",
+        "mapchart_color": "#41b6c4",
+        "mapchart_group": 4,
         "mapchart_hidden": false
       },
       "geometry": {
