@@ -4,18 +4,6 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "ICE Activity – Testing",
-        "category": "Report",
-        "description": "Test Pin"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-97.7431, 30.2672]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "title": "ICE Facility",
         "category": "Report",
         "description": "Facility Pin"

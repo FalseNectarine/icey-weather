@@ -84,7 +84,7 @@ const activeColors=new Set();
 const pinLayers={ reports:L.layerGroup(), ice:L.layerGroup() };
 const pinConfig={
   reports:{ label:"Reports (Pins)", color:"#ffcc00", file:"geoPins_reports.json" },
-  ice:{ label:"ICE Bases", color:"#ff3b3b", file:"geoPins_ice.json" }
+  /*ice:{ label:"ICE Bases", color:"#ff3b3b", file:"geoPins_reports.json" } */
 };
 function loadPins(key){ fetch(pinConfig[key].file).then(r=>r.json()).then(data=>{
   L.geoJSON(data,{ pointToLayer:(f,latlng)=>L.circleMarker(latlng,{radius:6, fillColor:pinConfig[key].color, color:"#000", weight:1, fillOpacity:0.9, bubblingMouseEvents:false}),
