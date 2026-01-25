@@ -4,18 +4,6 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "ICE Facility",
-        "category": "Report",
-        "description": "Facility Pin"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-77.453606, 37.70326]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "title": "ICE - Shooting",
         "category": "Report",
         "description": "Jan 24th 2026 | Alex Pretti | Filming"
