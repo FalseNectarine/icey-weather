@@ -1,0 +1,65 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "ICE Activity – Testing",
+        "category": "Report",
+        "description": "Test Pin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-97.7431, 30.2672]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "ICE Facility",
+        "category": "Report",
+        "description": "Facility Pin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-77.453606, 37.70326]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "ICE - Shooting",
+        "category": "Report",
+        "description": "Jan 24th 2026\n37yo US Citizen\nFilming"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-93.27752039215825, 44.9554644308971]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "ICE - Shooting",
+        "category": "Report",
+        "description": "Jan 7th 2026\nRenee Good"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-93.26753818343062, 44.94132192256501]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Police Killing - Archive",
+        "category": "Report",
+        "description": "May 2020\nGeorge Floyd"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-93.26247511854801, 44.935913110317]
+      }
+    }
+  ]
+}
