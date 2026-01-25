@@ -18,7 +18,7 @@
       "properties": {
         "title": "ICE - Shooting",
         "category": "Report",
-        "description": "Jan 24th 2026\nAlex Pretti\nFilming"
+        "description": "Jan 24th 2026 | Alex Pretti | Filming"
       },
       "geometry": {
         "type": "Point",
@@ -30,7 +30,7 @@
       "properties": {
         "title": "ICE - Shooting",
         "category": "Report",
-        "description": "Jan 7th 2026\nRenee Good\nGoing Home"
+        "description": "Jan 7th 2026 | Renee Good | Going Home"
       },
       "geometry": {
         "type": "Point",
@@ -42,7 +42,7 @@
       "properties": {
         "title": "Police Killing - Archive",
         "category": "Report",
-        "description": "May 2020\nGeorge Floyd"
+        "description": "May 2020 | George Floyd"
       },
       "geometry": {
         "type": "Point",
