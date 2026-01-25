@@ -9,97 +9,32 @@
   crossorigin />
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background: #525252;
-}
-
-#map {
-  width: 100%;
-  height: 100%;
-}
+html, body { margin:0; padding:0; height:100%; background:#525252; }
+#map { width:100%; height:100%; }
 
 /* ---------- Controls ---------- */
-
-.control-panel {
-  position: absolute;
-  right: 10px;
-  z-index: 1000;
-  background: #2f2f2f;
-  padding: 8px;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 0.9em;
-  max-height: 40vh;
-  overflow-y: auto;
-  user-select: none;
-}
-
-#stateControl { top: 10px; }
-#colorControl { top: 10px; right: 100px; }
-
-.toggle {
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.section {
-  margin-top: 6px;
-}
-
-.legend-swatch {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  margin-right: 6px;
-  border: 1px solid #000;
-  vertical-align: middle;
-}
+.control-panel { position:absolute; right:10px; z-index:1000; background:#2f2f2f; padding:8px; border-radius:6px; color:#fff; font-size:0.9em; max-height:40vh; overflow-y:auto; user-select:none; }
+#stateControl { top:10px; }
+#colorControl { top:10px; right:100px; }
+.toggle { cursor:pointer; font-weight:bold; }
+.section { margin-top:6px; }
+.legend-swatch { display:inline-block; width:14px; height:14px; margin-right:6px; border:1px solid #000; vertical-align:middle; }
 
 /* ---------- Static Legend ---------- */
-
-#staticLegend {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  z-index: 1100;
-  background: rgba(47,47,47,0.92);
-  padding: 8px 10px;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 0.85em;
-  user-select: none;
-}
-
-.legend-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 4px;
-}
-.legend-row:last-child { margin-bottom: 0; }
+#staticLegend { position:absolute; bottom:12px; right:12px; z-index:1100; background:rgba(47,47,47,0.92); padding:8px 10px; border-radius:6px; color:#fff; font-size:0.85em; user-select:none; }
+.legend-row { display:flex; align-items:center; margin-bottom:4px; }
+.legend-row:last-child { margin-bottom:0; }
 
 /* ---------- Popup ---------- */
-
-.popup-status {
-  font-size: 0.9em;
-  margin-bottom: 6px;
-}
-
-.popup-status.waiting { color: #aaa; }
-.popup-status.ready   { color: #6fdb6f; }
-.popup-status.error   { color: #ff6b6b; }
-
-button[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+.popup-status { font-size:0.9em; margin-bottom:6px; }
+.popup-status.waiting { color:#aaa; }
+.popup-status.ready { color:#6fdb6f; }
+.popup-status.error { color:#ff6b6b; }
+button[disabled] { opacity:0.5; cursor:not-allowed; }
 </style>
 </head>
 
 <body>
-
 <div id="stateControl" class="control-panel">
   <div id="stateToggle" class="toggle">▶ States</div>
   <div id="stateCheckboxes" class="section" hidden></div>
@@ -114,240 +49,123 @@ button[disabled] {
 <div id="map"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
 /* ============================
    CONFIG
 ============================ */
-
 const STATE_DATA_DIR = "geojson/20260115_1";
-
-const STATES = [
-  "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA",
-  "HI","ID","IL","IN","IA","KS","KY","LA","ME","MD",
-  "MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ",
-  "NM","NY","NC","ND","OH","OK","OR","PA","RI","SC",
-  "SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"
-];
+const STATES = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
+const CATEGORY_ORDER = ["resist","capit","rumor","spotted","staging","raid","door","violent"];
+function categoryRank(label){ const l=label.toLowerCase(); const i=CATEGORY_ORDER.findIndex(k=>l.includes(k)); return i===-1?999:i; }
 
 /* ============================
-   CATEGORY ORDER
+   D1 WORKER ENDPOINT
 ============================ */
-
-const CATEGORY_ORDER = [
-  "resist",
-  "capit",
-  "rumor",
-  "spotted",
-  "staging",
-  "raid",
-  "door",
-  "violent"
-];
-
-function categoryRank(label) {
-  const l = label.toLowerCase();
-  const i = CATEGORY_ORDER.findIndex(k => l.includes(k));
-  return i === -1 ? 999 : i;
-}
-
-/* ============================
-   GOOGLE FORM
-============================ */
-
-const FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSf_3lYCaWm1HsXnfdgA5ECoZijeBC1wdLm2g677XJcUufeirg/formResponse";
-
-const ENTRY = {
-  DATE: "entry.60272883",
-  TYPE: "entry.2129632532",
-  CITY_STATE: "entry.1350767981",
-  COUNTY: "entry.1502813908",
-  COORDS: "entry.144748390"
-};
+const WORKER_URL = "https://icey-weather-intake.dracomenda.workers.dev/";
 
 /* ============================
    MAP INIT
 ============================ */
-
-const map = L.map("map", {
-  zoomSnap: 0.25,
-  zoomDelta: 0.5
-}).setView([39.5, -98.35], 4);
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: "&copy; OpenStreetMap contributors | Dracos Corner Table"
-}).addTo(map);
+const map=L.map("map",{zoomSnap:0.25,zoomDelta:0.5}).setView([39.5,-98.35],4);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{ attribution:"&copy; OpenStreetMap contributors | Dracos Corner Table" }).addTo(map);
 
 /* ============================
    REGISTRIES
 ============================ */
-
-const stateLayers   = {};
-const stateFeatures = {};
-const activeStates  = new Set(STATES);
-
-const colorIndex   = new Map();
-const activeColors = new Set();
+const stateLayers={};
+const stateFeatures={};
+const activeStates=new Set(STATES);
+const colorIndex=new Map();
+const activeColors=new Set();
 
 /* ============================
-   STYLING
+   PINS (OPTION 1)
 ============================ */
+const pinLayers={ reports:L.layerGroup(), ice:L.layerGroup() };
+const pinConfig={
+  reports:{ label:"Reports (Pins)", color:"#ffcc00", file:"geoPins_reports.json" },
+  ice:{ label:"ICE Bases", color:"#ff3b3b", file:"geoPins_ice.json" }
+};
+function loadPins(key){ fetch(pinConfig[key].file).then(r=>r.json()).then(data=>{
+  L.geoJSON(data,{ pointToLayer:(f,latlng)=>L.circleMarker(latlng,{radius:6, fillColor:pinConfig[key].color, color:"#000", weight:1, fillOpacity:0.9, bubblingMouseEvents:false}),
+    onEachFeature:(f,l)=>{ l.bindPopup(`<b>${f.properties.title||""}</b><br>${f.properties.description||""}`); }
+  }).addTo(pinLayers[key]);
+}); }
+Object.keys(pinConfig).forEach(loadPins);
 
-function getColorKey(f) {
-  return f.properties.mapchart_label ||
-         f.properties.mapchart_color ||
-         "Uncategorized";
+/* ============================
+   COUNTY STYLING
+============================ */
+function getColorKey(f){ return f.properties.mapchart_label||f.properties.mapchart_color||"Uncategorized"; }
+function countyStyle(f){
+  const hidden=Boolean(f.properties.mapchart_hidden)||!activeColors.has(getColorKey(f));
+  return { fillColor:f.properties.mapchart_color||"#d1dbdd", weight:0.6, color:"#000", fillOpacity:hidden?0:0.75 };
 }
-
-function countyStyle(f) {
-  const hidden =
-    Boolean(f.properties.mapchart_hidden) ||
-    !activeColors.has(getColorKey(f));
-
-  return {
-    fillColor: f.properties.mapchart_color || "#d1dbdd",
-    weight: 0.6,
-    color: "#000",
-    fillOpacity: hidden ? 0 : 0.75
-  };
-}
-
-function onEachCounty(f, layer) {
-  layer.bindTooltip(f.properties.NAME || "Unknown", { sticky: true });
-}
+function onEachCounty(f,layer){ layer.bindTooltip(f.properties.NAME||"Unknown",{sticky:true}); }
 
 /* ============================
    LOAD STATES
 ============================ */
-
-async function loadState(state) {
-  const res = await fetch(`${STATE_DATA_DIR}/${state}.geojson`);
-  if (!res.ok) return;
-
-  const data = await res.json();
-
-  data.features.forEach(f => {
-    const key = getColorKey(f);
-    if (!colorIndex.has(key)) {
-      colorIndex.set(key, {
-        color: f.properties.mapchart_color || "#d1dbdd",
-        label: key
-      });
-      activeColors.add(key);
-    }
+async function loadState(state){
+  const res=await fetch(`${STATE_DATA_DIR}/${state}.geojson`);
+  if(!res.ok) return;
+  const data=await res.json();
+  data.features.forEach(f=>{
+    const key=getColorKey(f);
+    if(!colorIndex.has(key)){ colorIndex.set(key,{ color:f.properties.mapchart_color||"#d1dbdd", label:key }); activeColors.add(key); }
   });
-
-  const layer = L.geoJSON(data, {
-    style: countyStyle,
-    onEachFeature: onEachCounty
-  }).addTo(map);
-
-  stateLayers[state] = layer;
-  stateFeatures[state] = data.features;
-
+  const layer=L.geoJSON(data,{ style:countyStyle, onEachFeature:onEachCounty }).addTo(map);
+  stateLayers[state]=layer;
+  stateFeatures[state]=data.features;
   refreshColorUI();
 }
-
 STATES.forEach(loadState);
 
 /* ============================
-   STATE UI
+   UI CONTROLS
 ============================ */
+stateToggle.onclick=()=>{ const open=!stateCheckboxes.hasAttribute("hidden"); stateCheckboxes.toggleAttribute("hidden",open); stateToggle.textContent=open?"▶ States":"▼ States"; };
+STATES.forEach(s=>{ const l=document.createElement("label"); const c=document.createElement("input"); c.type="checkbox"; c.checked=true; c.onchange=()=>c.checked?map.addLayer(stateLayers[s]):map.removeLayer(stateLayers[s]); l.append(c,` ${s}`); stateCheckboxes.append(l,document.createElement("br")); });
 
-stateToggle.onclick = () => {
-  const open = !stateCheckboxes.hasAttribute("hidden");
-  stateCheckboxes.toggleAttribute("hidden", open);
-  stateToggle.textContent = open ? "▶ States" : "▼ States";
-};
+colorToggle.onclick=()=>{ const open=!colorCheckboxes.hasAttribute("hidden"); colorCheckboxes.toggleAttribute("hidden",open); colorToggle.textContent=open?"▶ Categories":"▼ Categories"; };
 
-STATES.forEach(s => {
-  const l = document.createElement("label");
-  const c = document.createElement("input");
-  c.type = "checkbox";
-  c.checked = true;
-  c.onchange = () => c.checked ? map.addLayer(stateLayers[s]) : map.removeLayer(stateLayers[s]);
-  l.append(c, ` ${s}`);
-  stateCheckboxes.append(l, document.createElement("br"));
-});
-
-/* ============================
-   COLOR UI + LEGEND
-============================ */
-
-colorToggle.onclick = () => {
-  const open = !colorCheckboxes.hasAttribute("hidden");
-  colorCheckboxes.toggleAttribute("hidden", open);
-  colorToggle.textContent = open ? "▶ Categories" : "▼ Categories";
-};
-
-function refreshColorUI() {
-  colorCheckboxes.innerHTML = "";
-  staticLegend.innerHTML = "";
-
-  [...colorIndex.entries()]
-    .sort((a,b)=>categoryRank(a[0]) - categoryRank(b[0]) || a[0].localeCompare(b[0]))
-    .forEach(([key, info]) => {
-
-      const cb = document.createElement("input");
-      cb.type = "checkbox";
-      cb.checked = activeColors.has(key);
-      cb.onchange = () => {
-        cb.checked ? activeColors.add(key) : activeColors.delete(key);
-        redrawAll();
-      };
-
-      const sw = document.createElement("span");
-      sw.className = "legend-swatch";
-      sw.style.background = info.color;
-
-      const lab = document.createElement("label");
-      lab.append(cb, " ", sw, info.label);
-      colorCheckboxes.append(lab, document.createElement("br"));
-
-      const row = document.createElement("div");
-      row.className = "legend-row";
-      row.append(sw.cloneNode(), document.createTextNode(info.label));
-      staticLegend.append(row);
-    });
+function refreshColorUI(){
+  colorCheckboxes.innerHTML="";
+  staticLegend.innerHTML="";
+  [...colorIndex.entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0])).forEach(([key,info])=>{
+    const cb=document.createElement("input"); cb.type="checkbox"; cb.checked=activeColors.has(key); cb.onchange=()=>{ cb.checked?activeColors.add(key):activeColors.delete(key); redrawAll(); };
+    const sw=document.createElement("span"); sw.className="legend-swatch"; sw.style.background=info.color;
+    const lab=document.createElement("label"); lab.append(cb," ",sw,info.label); colorCheckboxes.append(lab,document.createElement("br"));
+    const row=document.createElement("div"); row.className="legend-row"; row.append(sw.cloneNode(),document.createTextNode(info.label)); staticLegend.append(row);
+  });
+  Object.entries(pinConfig).forEach(([key,cfg])=>{
+    const cb=document.createElement("input"); cb.type="checkbox"; cb.checked=false; cb.onchange=()=>cb.checked?map.addLayer(pinLayers[key]):map.removeLayer(pinLayers[key]);
+    const sw=document.createElement("span"); sw.className="legend-swatch"; sw.style.background=cfg.color;
+    const lab=document.createElement("label"); lab.append(cb," ",sw,cfg.label); colorCheckboxes.append(lab,document.createElement("br"));
+  });
 }
 
-function redrawAll() {
-  Object.values(stateLayers).forEach(l => l.setStyle(countyStyle));
-}
+function redrawAll(){ Object.values(stateLayers).forEach(l=>l.setStyle(countyStyle)); }
 
 /* ============================
-   REPORT FLOW (UNCHANGED)
+   REPORT FLOW
 ============================ */
+let activeReport=null;
+let popupLock=false;
 
-let activeReport = null;
-let popupLock = false;
-let watchdog = null;
-
-map.on("click", e => {
-  if (popupLock) return;
-  popupLock = true;
-
-  activeReport = {
-    lat: e.latlng.lat,
-    lng: e.latlng.lng,
-    county: null,
-    state: null,
-    status: "gathering"
-  };
-
+map.on("click",e=>{
+  if(popupLock) return;
+  popupLock=true;
+  activeReport={ lat:e.latlng.lat, lng:e.latlng.lng, county:null, state:null, status:"gathering" };
   map.closePopup();
   openPopup();
   resolveLocation();
 });
 
-/* ---------- Popup, resolver, submit, geometry ---------- */
-/* (verbatim from your last working version) */
-
-function openPopup() {
-  const today = new Date().toISOString().split("T")[0];
-  const popup = L.popup({ closeOnClick: false })
-    .setLatLng([activeReport.lat, activeReport.lng])
+/* ---------- Popup + Resolver + Submit ---------- */
+function openPopup(){
+  const today=new Date().toISOString().split("T")[0];
+  const popup=L.popup({closeOnClick:false}).setLatLng([activeReport.lat,activeReport.lng])
     .setContent(`
       <div>
         <div id="popupStatus" class="popup-status waiting">Gathering location data…</div>
@@ -363,73 +181,76 @@ function openPopup() {
           <option>Violence Against Citizens</option>
           <option>Door to Door</option>
         </select><br><br>
+        <label><input type="checkbox" id="preciseLocation"> Precise Location</label><br><br>
         <button id="submitBtn" disabled>Gathering data…</button>
       </div>
     `).openOn(map);
-
-  popup.on("remove", resetFlow);
-  document.getElementById("submitBtn").onclick = submitReport;
+  popup.on("remove",resetFlow);
+  document.getElementById("submitBtn").onclick=submitReport;
 }
 
-function resolveLocation() {
-  const pt = [activeReport.lng, activeReport.lat];
-  for (const s of activeStates) {
-    for (const f of stateFeatures[s] || []) {
-      const polys = f.geometry.type === "Polygon" ? [f.geometry.coordinates] : f.geometry.coordinates;
-      for (const p of polys)
-        if (pointInPolygon(pt, p)) {
-          activeReport.state = s;
-          activeReport.county = f.properties.NAME;
-          activeReport.status = "ready";
-          return updateUI();
-        }
+function resolveLocation(){
+  const pt=[activeReport.lng,activeReport.lat];
+  for(const s of activeStates){
+    for(const f of stateFeatures[s]||[]){
+      const polys=f.geometry.type==="Polygon"? [f.geometry.coordinates] : f.geometry.coordinates;
+      for(const p of polys) if(pointInPolygon(pt,p)){ activeReport.state=s; activeReport.county=f.properties.NAME; activeReport.status="ready"; return updateUI(); }
     }
   }
-  activeReport.status = "error";
-  updateUI();
+  activeReport.status="error"; updateUI();
 }
 
-function updateUI() {
-  const s = popupStatus, b = submitBtn;
-  if (activeReport.status === "ready") {
-    s.className = "popup-status ready";
-    s.innerHTML = `${activeReport.state}<br>${activeReport.county}`;
-    b.disabled = false;
-    b.textContent = "Submit Report";
-  } else {
-    s.className = "popup-status error";
-    s.textContent = "Unable to resolve location.";
+function updateUI(){
+  const s=popupStatus,b=submitBtn;
+  if(activeReport.status==="ready"){ s.className="popup-status ready"; s.innerHTML=`${activeReport.state}<br>${activeReport.county}`; b.disabled=false; b.textContent="Submit Report"; }
+  else { s.className="popup-status error"; s.textContent="Unable to resolve location."; b.disabled=true; }
+}
+
+/* ---------- SUBMIT REPORT TO D1 WORKER ---------- */
+async function submitReport(){
+  const reportData = {
+    email: "webclick@data",
+    date_seen: dateSeen.value,
+    report_type: weatherType.value,
+    city_state: activeReport.state,
+    county: activeReport.county,
+    coords: `${activeReport.lat}, ${activeReport.lng}`,
+    precise_location: document.getElementById("preciseLocation").checked ? 1 : 0
+  };
+
+  try {
+    const response = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(reportData)
+    });
+
+    if (response.ok) {
+      map.closePopup();
+    } else {
+      console.error("Failed to submit report:", response.status);
+      alert("Failed to submit report. Please try again.");
+    }
+  } catch (error) {
+    console.error("Error submitting report:", error);
+    alert("Error submitting report. Please try again.");
   }
+
+  resetFlow();
 }
 
-function submitReport() {
-  const d = new URLSearchParams();
-  d.append(ENTRY.DATE, dateSeen.value);
-  d.append(ENTRY.TYPE, weatherType.value);
-  d.append(ENTRY.CITY_STATE, activeReport.state);
-  d.append(ENTRY.COUNTY, activeReport.county);
-  d.append(ENTRY.COORDS, `${activeReport.lat}, ${activeReport.lng}`);
-  fetch(FORM_URL, { method:"POST", mode:"no-cors", body:d });
-  map.closePopup();
-}
+function resetFlow(){ popupLock=false; activeReport=null; }
 
-function resetFlow() { popupLock = false; activeReport = null; }
-
-function pointInRing(pt, ring) {
-  let inside = false;
-  for (let i=0,j=ring.length-1;i<ring.length;j=i++)
-    if ((ring[i][1]>pt[1]) !== (ring[j][1]>pt[1]) &&
-        pt[0] < (ring[j][0]-ring[i][0])*(pt[1]-ring[i][1])/(ring[j][1]-ring[i][1])+ring[i][0])
-      inside = !inside;
+function pointInRing(pt,ring){
+  let inside=false;
+  for(let i=0,j=ring.length-1;i<ring.length;j=i++)
+    if((ring[i][1]>pt[1]) !== (ring[j][1]>pt[1]) && pt[0] < (ring[j][0]-ring[i][0])*(pt[1]-ring[i][1])/(ring[j][1]-ring[i][1])+ring[i][0]) inside=!inside;
   return inside;
 }
 
-function pointInPolygon(pt, poly) {
-  if (!pointInRing(pt, poly[0])) return false;
-  for (let i=1;i<poly.length;i++)
-    if (pointInRing(pt, poly[i])) return false;
-  return true;
-}
+function pointInPolygon(pt,poly){ if(!pointInRing(pt,poly[0])) return false; for(let i=1;i<poly.length;i++) if(!pointInRing(pt,poly[i])) return false; return true; }
 </script>
 </body>
 </html>
