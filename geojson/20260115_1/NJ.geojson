@@ -215,9 +215,9 @@
         "LSAD": "06",
         "ALAND": 266170662,
         "AWATER": 7046286,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "ICE - Rumor (unverified)",
+        "mapchart_color": "#c7e9b4",
+        "mapchart_group": 2,
         "mapchart_hidden": false
       },
       "geometry": {

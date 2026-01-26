@@ -54,7 +54,7 @@ button[disabled] { opacity:0.5; cursor:not-allowed; }
    CONFIG
 ============================ */
 const STATE_DATA_DIR = "geojson/20260115_1";
-const STATES = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
+const STATES = ["AL","AK","AZ","AR","CA","CO","CT", "DC", "DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
 const CATEGORY_ORDER = ["resist","capit","rumor","spotted","staging","raid","door","violent"];
 function categoryRank(label){ const l=label.toLowerCase(); const i=CATEGORY_ORDER.findIndex(k=>l.includes(k)); return i===-1?999:i; }
 
@@ -180,6 +180,10 @@ function openPopup(){
           <option>Raid</option>
           <option>Violence Against Citizens</option>
           <option>Door to Door</option>
+          <option>ICE - Hotel</option>
+          <option>ICE - Facility</option>
+          <option>ICE - 'Home Base'</option>
+          <option>Citizen Death</option>
         </select><br><br>
         <label><input type="checkbox" id="preciseLocation"> Precise Location</label><br><br>
         <button id="submitBtn" disabled>Gathering data…</button>
@@ -191,13 +195,79 @@ function openPopup(){
 
 function resolveLocation(){
   const pt=[activeReport.lng,activeReport.lat];
+  let bestMatch = null;
+  let bestArea = Infinity;
+
   for(const s of activeStates){
     for(const f of stateFeatures[s]||[]){
-      const polys=f.geometry.type==="Polygon"? [f.geometry.coordinates] : f.geometry.coordinates;
-      for(const p of polys) if(pointInPolygon(pt,p)){ activeReport.state=s; activeReport.county=f.properties.NAME; activeReport.status="ready"; return updateUI(); }
+      if(pointInFeature(pt, f)){
+        // Calculate area to prefer smaller features (cities over counties)
+        const area = calculateArea(f.geometry);
+        if(area < bestArea){
+          bestArea = area;
+          bestMatch = { state: s, county: f.properties.NAME };
+        }
+      }
     }
   }
-  activeReport.status="error"; updateUI();
+
+  if(bestMatch){
+    activeReport.state = bestMatch.state;
+    activeReport.county = bestMatch.county;
+    activeReport.status = "ready";
+  } else {
+    activeReport.status = "error";
+  }
+  updateUI();
+}
+
+function calculateArea(geometry){
+  // Simple bounding box area calculation
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+
+  const coords = geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
+
+  for(const polygon of coords){
+    for(const ring of polygon){
+      for(const [x, y] of ring){
+        minX = Math.min(minX, x);
+        maxX = Math.max(maxX, x);
+        minY = Math.min(minY, y);
+        maxY = Math.max(maxY, y);
+      }
+    }
+  }
+
+  return (maxX - minX) * (maxY - minY);
+}
+
+function pointInFeature(pt, feature){
+  const geom = feature.geometry;
+  if(geom.type === "Polygon"){
+    return pointInPolygon(pt, geom.coordinates);
+  } else if(geom.type === "MultiPolygon"){
+    for(const polygon of geom.coordinates){
+      if(pointInPolygon(pt, polygon)) return true;
+    }
+  }
+  return false;
+}
+
+function pointInPolygon(pt, coordinates){
+  // coordinates is [outerRing, hole1, hole2, ...]
+  // Must be inside outer ring AND outside all holes
+
+  if(!coordinates || coordinates.length === 0) return false;
+
+  // Check outer ring (must be inside)
+  if(!pointInRing(pt, coordinates[0])) return false;
+
+  // Check holes (must be outside all of them)
+  for(let i = 1; i < coordinates.length; i++){
+    if(pointInRing(pt, coordinates[i])) return false; // Inside a hole = outside polygon
+  }
+
+  return true;
 }
 
 function updateUI(){
@@ -249,8 +319,6 @@ function pointInRing(pt,ring){
     if((ring[i][1]>pt[1]) !== (ring[j][1]>pt[1]) && pt[0] < (ring[j][0]-ring[i][0])*(pt[1]-ring[i][1])/(ring[j][1]-ring[i][1])+ring[i][0]) inside=!inside;
   return inside;
 }
-
-function pointInPolygon(pt,poly){ if(!pointInRing(pt,poly[0])) return false; for(let i=1;i<poly.length;i++) if(!pointInRing(pt,poly[i])) return false; return true; }
 </script>
 </body>
 </html>

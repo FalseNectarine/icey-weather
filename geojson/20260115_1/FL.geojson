@@ -637,9 +637,9 @@
         "LSAD": "06",
         "ALAND": 1975764931,
         "AWATER": 403035529,
-        "mapchart_label": "Capitulate",
-        "mapchart_color": "#bd0026",
-        "mapchart_group": 1,
+        "mapchart_label": "ICE - Door to Door",
+        "mapchart_color": "#1d91c0",
+        "mapchart_group": 5,
         "mapchart_hidden": false
       },
       "geometry": {

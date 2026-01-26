@@ -36,6 +36,18 @@
         "type": "Point",
         "coordinates": [-93.26247511854801, 44.935913110317]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "User Reported - Citizen Detention",
+        "category": "Report",
+        "description": "Unknown Individual Detention"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-76.91699556110446, 39.31156542046223]
+      }
     }
   ]
 }
