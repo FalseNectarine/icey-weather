@@ -909,9 +909,9 @@
         "LSAD": "06",
         "ALAND": 23794788865,
         "AWATER": 5259325,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "ICE - Violent",
+        "mapchart_color": "#253494",
+        "mapchart_group": 6,
         "mapchart_hidden": false
       },
       "geometry": {
