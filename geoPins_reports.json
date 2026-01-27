@@ -48,6 +48,18 @@
         "type": "Point",
         "coordinates": [-76.91699556110446, 39.31156542046223]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "News Reported - ICE Shooting",
+        "category": "Report",
+        "description": "01/27/2026 Developing Situation | Critical Condition"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-111.186, 31.705]
+      }
     }
   ]
 }
