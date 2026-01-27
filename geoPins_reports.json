@@ -54,11 +54,23 @@
       "properties": {
         "title": "News Reported - ICE Shooting",
         "category": "Report",
-        "description": "01/27/2026 Developing Situation | Critical Condition"
+        "description": "Jan 27th 2026 | Developing Situation | Critical Condition"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [-111.186, 31.705]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "ICE Shooting",
+        "category": "Report",
+        "description": "Dec 31st 2025 | Keith Porter | Sitting at Apartment Complex"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-118.557946, 34.235245]
       }
     }
   ]
