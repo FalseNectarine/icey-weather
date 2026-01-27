@@ -24,6 +24,18 @@
         "type": "Point",
         "coordinates": [-104.849088, 39.760730]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "ICE - Super Bowl Security",
+        "category": "Report",
+        "description": "Enforcement Action Pin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-121.969904, 37.403588]
+      }
     }
   ]
 }
