@@ -1317,9 +1317,9 @@
         "LSAD": "06",
         "ALAND": 1436124182,
         "AWATER": 41487001,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "ICE - Rumor (unverified)",
+        "mapchart_color": "#c7e9b4",
+        "mapchart_group": 2,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -3055,9 +3055,9 @@
         "LSAD": "06",
         "ALAND": 1475875019,
         "AWATER": 9095218,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "ICE - Rumor (unverified)",
+        "mapchart_color": "#c7e9b4",
+        "mapchart_group": 2,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -3108,9 +3108,9 @@
         "LSAD": "06",
         "ALAND": 1523691141,
         "AWATER": 8561943,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "ICE - Rumor (unverified)",
+        "mapchart_color": "#c7e9b4",
+        "mapchart_group": 2,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -3530,9 +3530,9 @@
         "LSAD": "06",
         "ALAND": 1452999208,
         "AWATER": 2983840,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "ICE - Rumor (unverified)",
+        "mapchart_color": "#c7e9b4",
+        "mapchart_group": 2,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -4423,9 +4423,9 @@
         "LSAD": "06",
         "ALAND": 1482734960,
         "AWATER": 49332276,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "ICE - Rumor (unverified)",
+        "mapchart_color": "#c7e9b4",
+        "mapchart_group": 2,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -5206,9 +5206,9 @@
         "LSAD": "06",
         "ALAND": 1891773617,
         "AWATER": 6565650,
-        "mapchart_label": null,
-        "mapchart_color": null,
-        "mapchart_group": null,
+        "mapchart_label": "ICE - Rumor (unverified)",
+        "mapchart_color": "#c7e9b4",
+        "mapchart_group": 2,
         "mapchart_hidden": false
       },
       "geometry": {
