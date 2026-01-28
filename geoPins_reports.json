@@ -72,6 +72,18 @@
         "type": "Point",
         "coordinates": [-118.557946, 34.235245]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "ICE - Attempt to Forcefully to Enter",
+        "category": "Report",
+        "description": "Jan 27th 2026 | Ecuadorian Consulate"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-93.247580, 45.011237]
+      }
     }
   ]
 }
