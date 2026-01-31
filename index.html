@@ -55,7 +55,7 @@ button[disabled] { opacity:0.5; cursor:not-allowed; }
 ============================ */
 const STATE_DATA_DIR = "geojson/20260115_1";
 const STATES = ["AL","AK","AZ","AR","CA","CO","CT", "DC", "DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
-const CATEGORY_ORDER = ["resist","capit","rumor","spotted","staging","raid","door","violent"];
+const CATEGORY_ORDER = ["resist","capit","rumor","warn","data","spotted","staging","raid","door","violent"];
 function categoryRank(label){ const l=label.toLowerCase(); const i=CATEGORY_ORDER.findIndex(k=>l.includes(k)); return i===-1?999:i; }
 
 /* ============================

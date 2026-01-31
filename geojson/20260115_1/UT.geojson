@@ -421,8 +421,8 @@
         "LSAD": "06",
         "ALAND": 1921906751,
         "AWATER": 164903351,
-        "mapchart_label": "ICE - Rumor (unverified)",
-        "mapchart_color": "#c7e9b4",
+        "mapchart_label": "ICE - Raids",
+        "mapchart_color": "#41b6c4",
         "mapchart_group": 2,
         "mapchart_hidden": false
       },
