@@ -5109,7 +5109,7 @@
         "LSAD": "06",
         "ALAND": 1029475869,
         "AWATER": 13070242,
-        "mapchart_label": "ICE - Deplyment Warning",
+        "mapchart_label": "ICE - Deployment Warning",
         "mapchart_color": "#fa8128",
         "mapchart_group": 10,
         "mapchart_hidden": false

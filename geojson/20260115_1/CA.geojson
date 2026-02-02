@@ -288,9 +288,9 @@
         "LSAD": "06",
         "ALAND": 3344209919,
         "AWATER": 33276429,
-        "mapchart_label": "ICE - Raids",
-        "mapchart_color": "#41b6c4",
-        "mapchart_group": 4,
+        "mapchart_label": "ICE - Deployment Warning",
+        "mapchart_color": "#fa8128",
+        "mapchart_group": 10,
         "mapchart_hidden": false
       },
       "geometry": {
