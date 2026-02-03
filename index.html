@@ -79,19 +79,97 @@ const colorIndex=new Map();
 const activeColors=new Set();
 
 /* ============================
-   PINS (OPTION 1)
+   PINS SETUP
 ============================ */
 const pinLayers={ reports:L.layerGroup(), ice:L.layerGroup() };
 const pinConfig={
   reports:{ label:"Reports (Pins)", color:"#ffcc00", file:"geoPins_reports.json" },
   ice:{ label:"ICE Bases", color:"#ff3b3b", file:"geoPins_ice.json" }
 };
-function loadPins(key){ fetch(pinConfig[key].file).then(r=>r.json()).then(data=>{
-  L.geoJSON(data,{ pointToLayer:(f,latlng)=>L.circleMarker(latlng,{radius:6, fillColor:pinConfig[key].color, color:"#000", weight:1, fillOpacity:0.9, bubblingMouseEvents:false}),
-    onEachFeature:(f,l)=>{ l.bindPopup(`<b>${f.properties.title||""}</b><br>${f.properties.description||""}`); }
-  }).addTo(pinLayers[key]);
-}); }
-Object.keys(pinConfig).forEach(loadPins);
+
+function loadPins(key){
+  fetch(pinConfig[key].file)
+    .then(r=>{
+      if(!r.ok) throw new Error(`Failed to load ${pinConfig[key].file}: ${r.status}`);
+      return r.json();
+    })
+    .then(data=>{
+      L.geoJSON(data,{
+        pointToLayer:(f,latlng)=>L.circleMarker(latlng,{
+          radius:6,
+          fillColor:pinConfig[key].color,
+          color:"#000",
+          weight:1,
+          fillOpacity:0.9,
+          bubblingMouseEvents:false
+        }),
+        onEachFeature:(f,l)=>{
+          const props = f.properties;
+          let popupContent = `<b>${props.title||""}</b><br>${props.description||""}`;
+
+          // Handle images based on pin type (reports vs ice facilities)
+          const isReport = key === 'reports' || props.category === 'Report';
+
+          if (isReport) {
+            // Reports can have victim_image and/or shooter_image
+            if (props.victim_image || props.shooter_image) {
+              popupContent += '<div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">';
+
+              if (props.victim_image) {
+                popupContent += `
+                  <div style="text-align:center;">
+                    <a href="${props.victim_image}" target="_blank" rel="noopener noreferrer">
+                      <img src="${props.victim_image}"
+                           style="width:120px; height:120px; object-fit:cover; border-radius:4px; border:2px solid #fff;"
+                           alt="Victim"
+                           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                      <div style="display:none; width:120px; height:120px; align-items:center; justify-content:center; background:#333; color:#fff; font-size:12px; border-radius:4px; border:2px solid #fff;">Image unavailable</div>
+                    </a>
+                    <div style="font-size:11px; color:#ccc; margin-top:4px;">Victim</div>
+                  </div>`;
+              }
+
+              if (props.shooter_image) {
+                popupContent += `
+                  <div style="text-align:center;">
+                    <a href="${props.shooter_image}" target="_blank" rel="noopener noreferrer">
+                      <img src="${props.shooter_image}"
+                           style="width:120px; height:120px; object-fit:cover; border-radius:4px; border:2px solid #fff;"
+                           alt="Shooter"
+                           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                      <div style="display:none; width:120px; height:120px; align-items:center; justify-content:center; background:#333; color:#fff; font-size:12px; border-radius:4px; border:2px solid #fff;">Image unavailable</div>
+                    </a>
+                    <div style="font-size:11px; color:#ccc; margin-top:4px;">Shooter</div>
+                  </div>`;
+              }
+
+              popupContent += '</div>';
+            }
+          } else {
+            // ICE facilities use street_image
+            if (props.street_image) {
+              popupContent += `
+                <div style="margin-top:10px; text-align:center;">
+                  <a href="${props.street_image}" target="_blank" rel="noopener noreferrer">
+                    <img src="${props.street_image}"
+                         style="max-width:200px; max-height:150px; border-radius:4px; border:2px solid #fff;"
+                         alt="Street view"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="display:none; width:200px; height:120px; align-items:center; justify-content:center; background:#333; color:#fff; font-size:12px; border-radius:4px; border:2px solid #fff;">Image unavailable</div>
+                  </a>
+                  <div style="font-size:11px; color:#ccc; margin-top:4px;">Street View</div>
+                </div>`;
+            }
+          }
+
+          l.bindPopup(popupContent, { maxWidth: 280 });
+        }
+      }).addTo(pinLayers[key]);
+    })
+    .catch(err=>{
+      console.error(`Error loading pins for ${key}:`, err);
+    });
+}
 
 /* ============================
    COUNTY STYLING
@@ -107,28 +185,26 @@ function onEachCounty(f,layer){ layer.bindTooltip(f.properties.NAME||"Unknown",{
    LOAD STATES
 ============================ */
 async function loadState(state){
-  const res=await fetch(`${STATE_DATA_DIR}/${state}.geojson`);
-  if(!res.ok) return;
-  const data=await res.json();
-  data.features.forEach(f=>{
-    const key=getColorKey(f);
-    if(!colorIndex.has(key)){ colorIndex.set(key,{ color:f.properties.mapchart_color||"#d1dbdd", label:key }); activeColors.add(key); }
-  });
-  const layer=L.geoJSON(data,{ style:countyStyle, onEachFeature:onEachCounty }).addTo(map);
-  stateLayers[state]=layer;
-  stateFeatures[state]=data.features;
-  refreshColorUI();
+  try {
+    const res=await fetch(`${STATE_DATA_DIR}/${state}.geojson`);
+    if(!res.ok) return;
+    const data=await res.json();
+    data.features.forEach(f=>{
+      const key=getColorKey(f);
+      if(!colorIndex.has(key)){ colorIndex.set(key,{ color:f.properties.mapchart_color||"#d1dbdd", label:key }); activeColors.add(key); }
+    });
+    const layer=L.geoJSON(data,{ style:countyStyle, onEachFeature:onEachCounty }).addTo(map);
+    stateLayers[state]=layer;
+    stateFeatures[state]=data.features;
+    refreshColorUI();
+  } catch(e) {
+    console.error(`Error loading state ${state}:`, e);
+  }
 }
-STATES.forEach(loadState);
 
 /* ============================
    UI CONTROLS
 ============================ */
-stateToggle.onclick=()=>{ const open=!stateCheckboxes.hasAttribute("hidden"); stateCheckboxes.toggleAttribute("hidden",open); stateToggle.textContent=open?"▶ States":"▼ States"; };
-STATES.forEach(s=>{ const l=document.createElement("label"); const c=document.createElement("input"); c.type="checkbox"; c.checked=true; c.onchange=()=>c.checked?map.addLayer(stateLayers[s]):map.removeLayer(stateLayers[s]); l.append(c,` ${s}`); stateCheckboxes.append(l,document.createElement("br")); });
-
-colorToggle.onclick=()=>{ const open=!colorCheckboxes.hasAttribute("hidden"); colorCheckboxes.toggleAttribute("hidden",open); colorToggle.textContent=open?"▶ Categories":"▼ Categories"; };
-
 function refreshColorUI(){
   colorCheckboxes.innerHTML="";
   staticLegend.innerHTML="";
@@ -153,16 +229,89 @@ function redrawAll(){ Object.values(stateLayers).forEach(l=>l.setStyle(countySty
 let activeReport=null;
 let popupLock=false;
 
-map.on("click",e=>{
-  if(popupLock) return;
-  popupLock=true;
-  activeReport={ lat:e.latlng.lat, lng:e.latlng.lng, county:null, state:null, status:"gathering" };
-  map.closePopup();
-  openPopup();
-  resolveLocation();
-});
+function pointInRing(pt,ring){
+  let inside=false;
+  for(let i=0,j=ring.length-1;i<ring.length;j=i++)
+    if((ring[i][1]>pt[1]) !== (ring[j][1]>pt[1]) && pt[0] < (ring[j][0]-ring[i][0])*(pt[1]-ring[i][1])/(ring[j][1]-ring[i][1])+ring[i][0]) inside=!inside;
+  return inside;
+}
 
-/* ---------- Popup + Resolver + Submit ---------- */
+function pointInPolygon(pt, coordinates){
+  if(!coordinates || coordinates.length === 0) return false;
+  if(!pointInRing(pt, coordinates[0])) return false;
+  for(let i = 1; i < coordinates.length; i++){
+    if(pointInRing(pt, coordinates[i])) return false;
+  }
+  return true;
+}
+
+function pointInFeature(pt, feature){
+  const geom = feature.geometry;
+  if(geom.type === "Polygon"){
+    return pointInPolygon(pt, geom.coordinates);
+  } else if(geom.type === "MultiPolygon"){
+    for(const polygon of geom.coordinates){
+      if(pointInPolygon(pt, polygon)) return true;
+    }
+  }
+  return false;
+}
+
+function calculateArea(geometry){
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+  const coords = geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
+  for(const polygon of coords){
+    for(const ring of polygon){
+      for(const [x, y] of ring){
+        minX = Math.min(minX, x);
+        maxX = Math.max(maxX, x);
+        minY = Math.min(minY, y);
+        maxY = Math.max(maxY, y);
+      }
+    }
+  }
+  return (maxX - minX) * (maxY - minY);
+}
+
+function updateUI(){
+  const s=popupStatus,b=submitBtn;
+  if(activeReport.status==="ready"){ s.className="popup-status ready"; s.innerHTML=`${activeReport.state}<br>${activeReport.county}`; b.disabled=false; b.textContent="Submit Report"; }
+  else { s.className="popup-status error"; s.textContent="Unable to resolve location."; b.disabled=true; }
+}
+
+function resetFlow(){ popupLock=false; activeReport=null; }
+
+async function submitReport(){
+  const reportData = {
+    email: "webclick@data",
+    date_seen: dateSeen.value,
+    report_type: weatherType.value,
+    city_state: activeReport.state,
+    county: activeReport.county,
+    coords: `${activeReport.lat}, ${activeReport.lng}`,
+    precise_location: document.getElementById("preciseLocation").checked ? 1 : 0
+  };
+
+  try {
+    const response = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(reportData)
+    });
+
+    if (response.ok) {
+      map.closePopup();
+    } else {
+      console.error("Failed to submit report:", response.status);
+      alert("Failed to submit report. Please try again.");
+    }
+  } catch (error) {
+    console.error("Error submitting report:", error);
+    alert("Error submitting report. Please try again.");
+  }
+  resetFlow();
+}
+
 function openPopup(){
   const today=new Date().toISOString().split("T")[0];
   const popup=L.popup({closeOnClick:false}).setLatLng([activeReport.lat,activeReport.lng])
@@ -201,7 +350,6 @@ function resolveLocation(){
   for(const s of activeStates){
     for(const f of stateFeatures[s]||[]){
       if(pointInFeature(pt, f)){
-        // Calculate area to prefer smaller features (cities over counties)
         const area = calculateArea(f.geometry);
         if(area < bestArea){
           bestArea = area;
@@ -221,104 +369,35 @@ function resolveLocation(){
   updateUI();
 }
 
-function calculateArea(geometry){
-  // Simple bounding box area calculation
-  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+map.on("click",e=>{
+  if(popupLock) return;
+  popupLock=true;
+  activeReport={ lat:e.latlng.lat, lng:e.latlng.lng, county:null, state:null, status:"gathering" };
+  map.closePopup();
+  openPopup();
+  resolveLocation();
+});
 
-  const coords = geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
+/* ============================
+   INITIALIZATION
+============================ */
+stateToggle.onclick=()=>{ const open=!stateCheckboxes.hasAttribute("hidden"); stateCheckboxes.toggleAttribute("hidden",open); stateToggle.textContent=open?"▶ States":"▼ States"; };
+colorToggle.onclick=()=>{ const open=!colorCheckboxes.hasAttribute("hidden"); colorCheckboxes.toggleAttribute("hidden",open); colorToggle.textContent=open?"▶ Categories":"▼ Categories"; };
 
-  for(const polygon of coords){
-    for(const ring of polygon){
-      for(const [x, y] of ring){
-        minX = Math.min(minX, x);
-        maxX = Math.max(maxX, x);
-        minY = Math.min(minY, y);
-        maxY = Math.max(maxY, y);
-      }
-    }
-  }
+// Load all data
+STATES.forEach(loadState);
+STATES.forEach(s=>{
+  const l=document.createElement("label");
+  const c=document.createElement("input");
+  c.type="checkbox";
+  c.checked=true;
+  c.onchange=()=>c.checked?map.addLayer(stateLayers[s]):map.removeLayer(stateLayers[s]);
+  l.append(c,` ${s}`);
+  stateCheckboxes.append(l,document.createElement("br"));
+});
 
-  return (maxX - minX) * (maxY - minY);
-}
-
-function pointInFeature(pt, feature){
-  const geom = feature.geometry;
-  if(geom.type === "Polygon"){
-    return pointInPolygon(pt, geom.coordinates);
-  } else if(geom.type === "MultiPolygon"){
-    for(const polygon of geom.coordinates){
-      if(pointInPolygon(pt, polygon)) return true;
-    }
-  }
-  return false;
-}
-
-function pointInPolygon(pt, coordinates){
-  // coordinates is [outerRing, hole1, hole2, ...]
-  // Must be inside outer ring AND outside all holes
-
-  if(!coordinates || coordinates.length === 0) return false;
-
-  // Check outer ring (must be inside)
-  if(!pointInRing(pt, coordinates[0])) return false;
-
-  // Check holes (must be outside all of them)
-  for(let i = 1; i < coordinates.length; i++){
-    if(pointInRing(pt, coordinates[i])) return false; // Inside a hole = outside polygon
-  }
-
-  return true;
-}
-
-function updateUI(){
-  const s=popupStatus,b=submitBtn;
-  if(activeReport.status==="ready"){ s.className="popup-status ready"; s.innerHTML=`${activeReport.state}<br>${activeReport.county}`; b.disabled=false; b.textContent="Submit Report"; }
-  else { s.className="popup-status error"; s.textContent="Unable to resolve location."; b.disabled=true; }
-}
-
-/* ---------- SUBMIT REPORT TO D1 WORKER ---------- */
-async function submitReport(){
-  const reportData = {
-    email: "webclick@data",
-    date_seen: dateSeen.value,
-    report_type: weatherType.value,
-    city_state: activeReport.state,
-    county: activeReport.county,
-    coords: `${activeReport.lat}, ${activeReport.lng}`,
-    precise_location: document.getElementById("preciseLocation").checked ? 1 : 0
-  };
-
-  try {
-    const response = await fetch(WORKER_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(reportData)
-    });
-
-    if (response.ok) {
-      map.closePopup();
-    } else {
-      console.error("Failed to submit report:", response.status);
-      alert("Failed to submit report. Please try again.");
-    }
-  } catch (error) {
-    console.error("Error submitting report:", error);
-    alert("Error submitting report. Please try again.");
-  }
-
-  resetFlow();
-}
-
-function resetFlow(){ popupLock=false; activeReport=null; }
-
-function pointInRing(pt,ring){
-  let inside=false;
-  for(let i=0,j=ring.length-1;i<ring.length;j=i++)
-    if((ring[i][1]>pt[1]) !== (ring[j][1]>pt[1]) && pt[0] < (ring[j][0]-ring[i][0])*(pt[1]-ring[i][1])/(ring[j][1]-ring[i][1])+ring[i][0]) inside=!inside;
-  return inside;
-}
+// Load pins after map is initialized
+Object.keys(pinConfig).forEach(loadPins);
 </script>
 </body>
 </html>

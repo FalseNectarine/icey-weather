@@ -6,7 +6,8 @@
       "properties": {
         "title": "ICE - Shooting",
         "category": "Report",
-        "description": "Jan 24th 2026 | Alex Pretti | Filming"
+        "description": "Jan 24th 2026 | Alex Pretti | Filming",
+        "victim_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Alex_Pretti_VA_Image_%28official_portrait_by_United_States_Department_of_Veterans_Affairs%29.jpg/793px-Alex_Pretti_VA_Image_%28official_portrait_by_United_States_Department_of_Veterans_Affairs%29.jpg"
       },
       "geometry": {
         "type": "Point",
@@ -18,7 +19,8 @@
       "properties": {
         "title": "ICE - Shooting",
         "category": "Report",
-        "description": "Jan 7th 2026 | Renee Good | Going Home"
+        "description": "Jan 7th 2026 | Renee Good | Going Home",
+        "victim_image": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Renee_Good_DHS_agent_perspective.jpg"
       },
       "geometry": {
         "type": "Point",
@@ -30,7 +32,8 @@
       "properties": {
         "title": "Police Killing - Archive",
         "category": "Report",
-        "description": "May 2020 | George Floyd"
+        "description": "May 2020 | George Floyd",
+        "victim_image": "https://upload.wikimedia.org/wikipedia/en/9/9c/George_Floyd.png"
       },
       "geometry": {
         "type": "Point",
@@ -54,7 +57,8 @@
       "properties": {
         "title": "News Reported - ICE Shooting",
         "category": "Report",
-        "description": "Jan 27th 2026 | Developing Situation | Critical Condition"
+        "description": "Jan 27th 2026 | Patrick Gary Schlegel | Armed Conflict with Agents",
+        "victim_image": "https://bloximages.chicago2.vip.townnews.com/gvnews.com/content/tncms/assets/v3/editorial/a/c7/ac7cb4f7-21eb-43ac-9658-251bc6a3b9a1/697bae800acf1.image.jpg?resize=345%2C500"
       },
       "geometry": {
         "type": "Point",
@@ -66,7 +70,8 @@
       "properties": {
         "title": "ICE Shooting",
         "category": "Report",
-        "description": "Dec 31st 2025 | Keith Porter | Sitting at Apartment Complex"
+        "description": "Dec 31st 2025 | Keith Porter | Sitting at Apartment Complex",
+        "victim_image": "https://images.foxtv.com/static.foxla.com/www.foxla.com/content/uploads/2026/01/1280/720/keith-porter-shot-by-ice-officer.jpg?ve=1&tl=1"
       },
       "geometry": {
         "type": "Point",
@@ -78,7 +83,8 @@
       "properties": {
         "title": "ICE - Attempt to Forcefully to Enter",
         "category": "Report",
-        "description": "Jan 27th 2026 | Ecuadorian Consulate"
+        "description": "Jan 27th 2026 | Ecuadorian Consulate",
+        "victim_image": "https://static.independent.co.uk/2026/01/29/16/12/US-Ecuador-Consulate-7pbscg83.jpeg?width=1200&height=1200&fit=crop"
       },
       "geometry": {
         "type": "Point",

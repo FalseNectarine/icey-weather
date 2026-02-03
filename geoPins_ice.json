@@ -5,24 +5,12 @@
       "type": "Feature",
       "properties": {
         "title": "ICE Facility",
-        "category": "Report",
+        "category": "Facility",
         "description": "Facility Pin"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-77.453606, 37.70326]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "ICE - GEO Facility",
-        "category": "Report",
-        "description": "Facility Pin"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-104.849088, 39.760730]
+        "coordinates": [-77.45361, 37.70326]
       }
     },
     {
@@ -34,7 +22,238 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-121.969904, 37.403588]
+        "coordinates": [-121.96990, 37.40359]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "ICE - South Texas Family Residential Center",
+        "category": "Facility",
+        "description": "Child Detention Center",
+        "street_image": "https://i0.wp.com/www.texastribune.org/wp-content/uploads/2026/01/20260124-Dilley-AP-BB-01.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-99.20015, 28.65822]
+      }
+    },
+
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Adelanto ICE Processing Center (GEO)",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-117.40308, 34.58256]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Aurora ICE Processing Center (GEO)",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-104.84909, 39.76073]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Northwest ICE Processing Center (Tacoma)",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.45142, 47.24358]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Stewart Detention Center",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.88752, 32.04302]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Krome North Service Processing Center",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-80.42529, 25.63562]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Otay Mesa Detention Center",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-116.96764, 32.56166]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Eloy Detention Center",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-111.54869, 32.75555]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Florence Service Processing Center",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-111.38723, 33.04055]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "South Louisiana ICE Processing Center",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.82926, 30.51349]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Pine Prairie ICE Processing Center",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.42991, 30.78371]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Batavia ICE Processing Center",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-78.18349, 42.99823]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Elizabeth Contract Detention Facility",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.17237, 40.66738]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Moshannon Valley Processing Center",
+        "category": "Facility",
+        "description": "ICE Detention Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-78.35086, 40.97177]
+      }
+    },
+
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "CBP El Paso Central Processing Center",
+        "category": "Facility",
+        "description": "CBP Processing Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-106.48502, 31.76188]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "CBP Rio Grande Valley Central Processing Center",
+        "category": "Facility",
+        "description": "CBP Processing Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-98.23001, 26.20341]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "CBP Tucson Sector Processing Center",
+        "category": "Facility",
+        "description": "CBP Processing Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-110.95063, 32.22174]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "CBP Yuma Processing Center",
+        "category": "Facility",
+        "description": "CBP Processing Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-114.62769, 32.69265]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "CBP San Diego Sector Processing Center",
+        "category": "Facility",
+        "description": "CBP Processing Facility"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-117.08444, 32.56655]
       }
     }
   ]
