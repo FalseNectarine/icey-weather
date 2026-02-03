@@ -13,9 +13,9 @@
         "LSAD": "06",
         "ALAND": 1013366849,
         "AWATER": 1103741896,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -70,9 +70,9 @@
         "LSAD": "06",
         "ALAND": 2665875177,
         "AWATER": 13153776,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -147,9 +147,9 @@
         "LSAD": "06",
         "ALAND": 1676140490,
         "AWATER": 28201061,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -220,9 +220,9 @@
         "LSAD": "06",
         "ALAND": 2016012328,
         "AWATER": 70528316,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -301,9 +301,9 @@
         "LSAD": "06",
         "ALAND": 1689815931,
         "AWATER": 33569457,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -390,9 +390,9 @@
         "LSAD": "06",
         "ALAND": 4447987884,
         "AWATER": 234205889,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -491,9 +491,9 @@
         "LSAD": "06",
         "ALAND": 1291815779,
         "AWATER": 7112822,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -552,9 +552,9 @@
         "LSAD": "06",
         "ALAND": 1044067732,
         "AWATER": 18598434,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -637,9 +637,9 @@
         "LSAD": "06",
         "ALAND": 1696091558,
         "AWATER": 16670528,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -730,9 +730,9 @@
         "LSAD": "06",
         "ALAND": 2314378336,
         "AWATER": 13062477,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -811,9 +811,9 @@
         "LSAD": "06",
         "ALAND": 1343192581,
         "AWATER": 11059913,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -900,9 +900,9 @@
         "LSAD": "06",
         "ALAND": 1535218841,
         "AWATER": 9158424,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -973,9 +973,9 @@
         "LSAD": "06",
         "ALAND": 596504204,
         "AWATER": 41282800,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -1058,9 +1058,9 @@
         "LSAD": "06",
         "ALAND": 3601504767,
         "AWATER": 35055663,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -1151,9 +1151,9 @@
         "LSAD": "06",
         "ALAND": 1702151431,
         "AWATER": 1837595092,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -1260,9 +1260,9 @@
         "LSAD": "06",
         "ALAND": 1643778340,
         "AWATER": 35063763,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -1337,9 +1337,9 @@
         "LSAD": "06",
         "ALAND": 1791190504,
         "AWATER": 445708175,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -1434,9 +1434,9 @@
         "LSAD": "06",
         "ALAND": 2745967850,
         "AWATER": 1139487496,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -1523,9 +1523,9 @@
         "LSAD": "06",
         "ALAND": 838403626,
         "AWATER": 172828921,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -1600,9 +1600,9 @@
         "LSAD": "06",
         "ALAND": 3139921985,
         "AWATER": 117340432,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -1697,9 +1697,9 @@
         "LSAD": "06",
         "ALAND": 2594462131,
         "AWATER": 36339122,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -1802,9 +1802,9 @@
         "LSAD": "06",
         "ALAND": 2700590735,
         "AWATER": 476948860,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -1991,9 +1991,9 @@
         "LSAD": "06",
         "ALAND": 1668114449,
         "AWATER": 47820988,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -2096,9 +2096,9 @@
         "LSAD": "06",
         "ALAND": 1352887116,
         "AWATER": 1598842827,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -2221,9 +2221,9 @@
         "LSAD": "06",
         "ALAND": 1276698028,
         "AWATER": 6142605,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -2290,9 +2290,9 @@
         "LSAD": "06",
         "ALAND": 850379112,
         "AWATER": 36246374,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -2371,9 +2371,9 @@
         "LSAD": "06",
         "ALAND": 3285895343,
         "AWATER": 1524639909,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -2536,9 +2536,9 @@
         "LSAD": "06",
         "ALAND": 2464746080,
         "AWATER": 933480216,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -2665,9 +2665,9 @@
         "LSAD": "06",
         "ALAND": 3735952964,
         "AWATER": 64717114,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -2766,9 +2766,9 @@
         "LSAD": "06",
         "ALAND": 6939259769,
         "AWATER": 367915773,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -2887,9 +2887,9 @@
         "LSAD": "06",
         "ALAND": 1115031328,
         "AWATER": 179949077,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -3016,9 +3016,9 @@
         "LSAD": "06",
         "ALAND": 2507463254,
         "AWATER": 74035009,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -3117,9 +3117,9 @@
         "LSAD": "06",
         "ALAND": 2687771451,
         "AWATER": 206611024,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -3234,9 +3234,9 @@
         "LSAD": "06",
         "ALAND": 58681329,
         "AWATER": 28550878,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -3315,9 +3315,9 @@
         "LSAD": "06",
         "ALAND": 1610503572,
         "AWATER": 11676949,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -3412,9 +3412,9 @@
         "LSAD": "06",
         "ALAND": 2097880370,
         "AWATER": 87571838,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -3630,9 +3630,9 @@
         "LSAD": "06",
         "ALAND": 1827987181,
         "AWATER": 25185424,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -3731,9 +3731,9 @@
         "LSAD": "06",
         "ALAND": 2152713677,
         "AWATER": 38126891,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -3848,9 +3848,9 @@
         "LSAD": "06",
         "ALAND": 148972687,
         "AWATER": 115952653,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -3945,9 +3945,9 @@
         "LSAD": "06",
         "ALAND": 2911757797,
         "AWATER": 94596954,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -4042,9 +4042,9 @@
         "LSAD": "06",
         "ALAND": 3388633499,
         "AWATER": 36608250,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -4119,9 +4119,9 @@
         "LSAD": "06",
         "ALAND": 2360846288,
         "AWATER": 3785546967,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -4366,9 +4366,9 @@
         "LSAD": "06",
         "ALAND": 108910661,
         "AWATER": 39682657,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -4447,9 +4447,9 @@
         "LSAD": "06",
         "ALAND": 4646734755,
         "AWATER": 316368965,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -4608,9 +4608,9 @@
         "LSAD": "06",
         "ALAND": 1283234678,
         "AWATER": 96916405,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -4681,9 +4681,9 @@
         "LSAD": "06",
         "ALAND": 449199631,
         "AWATER": 66861670,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -4746,9 +4746,9 @@
         "LSAD": "06",
         "ALAND": 3655805548,
         "AWATER": 120422420,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -4859,9 +4859,9 @@
         "LSAD": "06",
         "ALAND": 2246154434,
         "AWATER": 166682934,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -4936,9 +4936,9 @@
         "LSAD": "06",
         "ALAND": 179672197,
         "AWATER": 71097153,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -5065,9 +5065,9 @@
         "LSAD": "06",
         "ALAND": 737191047,
         "AWATER": 437282733,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -5202,9 +5202,9 @@
         "LSAD": "06",
         "ALAND": 529856261,
         "AWATER": 12600384,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -5271,9 +5271,9 @@
         "LSAD": "06",
         "ALAND": 1055038643,
         "AWATER": 8874334,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -5344,9 +5344,9 @@
         "LSAD": "06",
         "ALAND": 1354083642,
         "AWATER": 27161700,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -5421,9 +5421,9 @@
         "LSAD": "06",
         "ALAND": 1636256623,
         "AWATER": 22006106,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -5526,9 +5526,9 @@
         "LSAD": "06",
         "ALAND": 4219632482,
         "AWATER": 176707575,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -5607,9 +5607,9 @@
         "LSAD": "06",
         "ALAND": 1563903159,
         "AWATER": 2018194942,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -5700,9 +5700,9 @@
         "LSAD": "06",
         "ALAND": 3301307137,
         "AWATER": 39612943,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -5785,9 +5785,9 @@
         "LSAD": "06",
         "ALAND": 281697156,
         "AWATER": 179401845,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -5918,9 +5918,9 @@
         "LSAD": "06",
         "ALAND": 875785691,
         "AWATER": 97504774,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -5999,9 +5999,9 @@
         "LSAD": "06",
         "ALAND": 1229335996,
         "AWATER": 43792937,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
@@ -6076,9 +6076,9 @@
         "LSAD": "06",
         "ALAND": 2060678182,
         "AWATER": 76956282,
-        "mapchart_label": "Resistive",
-        "mapchart_color": "#00441b",
-        "mapchart_group": 0,
+        "mapchart_label": null,
+        "mapchart_color": null,
+        "mapchart_group": null,
         "mapchart_hidden": false
       },
       "geometry": {
