@@ -81,10 +81,11 @@ const activeColors=new Set();
 /* ============================
    PINS SETUP
 ============================ */
-const pinLayers={ reports:L.layerGroup(), ice:L.layerGroup() };
+const pinLayers={ reports:L.layerGroup(), ice:L.layerGroup(), airport:L.layerGroup() };
 const pinConfig={
   reports:{ label:"Reports (Pins)", color:"#ffcc00", file:"geoPins_reports.json" },
-  ice:{ label:"ICE Bases", color:"#ff3b3b", file:"geoPins_ice.json" }
+  ice:{ label:"ICE Bases", color:"#ff3b3b", file:"geoPins_ice.json" },
+  airport:{ label:"Airport Checkpoints", color:"#00ffd0", file:"airport_check.json" }
 };
 
 function loadPins(key){
@@ -329,6 +330,8 @@ function openPopup(){
           <option>Raid</option>
           <option>Violence Against Citizens</option>
           <option>Door to Door</option>
+          <option>ICE - Airport</option>
+          <option>ICE - International Airport</option>
           <option>ICE - Hotel</option>
           <option>ICE - Facility</option>
           <option>ICE - 'Home Base'</option>

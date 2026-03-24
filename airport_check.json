@@ -1,0 +1,17 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "SFO | San Francisco International Airport",
+        "category": "airport",
+        "description": "Airport Checkpoint"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.38662258840657, 37.615994219671535]
+      }
+    }
+  ]
+}
